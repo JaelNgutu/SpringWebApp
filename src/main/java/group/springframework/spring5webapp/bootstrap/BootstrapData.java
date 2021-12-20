@@ -25,22 +25,6 @@ public class BootstrapData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Author jael = new Author("Jael","Ngutu");
-        Book sampleBook = new Book("java programming","fbf283");
-        jael.getBooks().add(sampleBook);
-        sampleBook.getAuthors().add(jael);
-
-        authorRepository.save(jael);
-        bookRepository.save(sampleBook);
-
-        Author lucy = new Author("Lucy","May");
-        Book sampleBook2 = new Book("java programming 2","fbf283k");
-        lucy.getBooks().add(sampleBook2);
-        sampleBook2.getAuthors().add(lucy);
-
-        authorRepository.save(lucy);
-        bookRepository.save(sampleBook2);
-
         Publisher publisher = new Publisher();
         publisher.setName("Nairobi publishers");
         publisher.setCity("Nairobi");
@@ -48,12 +32,34 @@ public class BootstrapData implements CommandLineRunner {
 
         publisherRepository.save(publisher);
 
-        System.out.println("started in boostrap");
+        Author jael = new Author("Jael","Ngutu");
+        Book sampleBook = new Book("java programming","fbf283");
+        jael.getBooks().add(sampleBook);
+        sampleBook.getAuthors().add(jael);
+
+        sampleBook.setPublisher(publisher);
+        publisher.getBooks().add(sampleBook);
+
+        authorRepository.save(jael);
+        bookRepository.save(sampleBook);
+        publisherRepository.save(publisher);
+
+        Author lucy = new Author("Lucy","May");
+        Book sampleBook2 = new Book("java programming 2","fbf283k");
+        lucy.getBooks().add(sampleBook2);
+        sampleBook2.getAuthors().add(lucy);
+
+
+
+        authorRepository.save(lucy);
+        bookRepository.save(sampleBook2);
+
 
         System.out.println("Publisher Count: " + publisherRepository.count());
 
 
         System.out.println("Number of books:" + bookRepository.count());
+        System.out.println("Publisher no of books " + publisher.getBooks().size());
 
     }
 }
