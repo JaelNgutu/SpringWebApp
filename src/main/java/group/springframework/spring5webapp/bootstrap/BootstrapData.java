@@ -45,15 +45,18 @@ public class BootstrapData implements CommandLineRunner {
         publisherRepository.save(publisher);
 
         Author lucy = new Author("Lucy","May");
-        Book sampleBook2 = new Book("java programming 2","fbf283k");
+        Book sampleBook2 = new Book("angular programming 2","fbf283k");
         lucy.getBooks().add(sampleBook2);
         sampleBook2.getAuthors().add(lucy);
+
+        sampleBook2.setPublisher(publisher);
+        publisher.getBooks().add(sampleBook2);
 
 
 
         authorRepository.save(lucy);
         bookRepository.save(sampleBook2);
-
+        publisherRepository.save(publisher);
 
         System.out.println("Publisher Count: " + publisherRepository.count());
 
